@@ -14,14 +14,14 @@ namespace DemoLib.Test
             " (Parameter 'name')");
 
         [Fact]
-        public void TestLocalGetEncoding()
+        public void TestA_LocalGetEncoding()
         {
             var encoding = LocalProviderContainer.GetEncoding(s_codepageName);
             Assert.NotNull(encoding);
         }
 
         [Fact]
-        public void TestGlobalGetEncoding()
+        public void TestB_GlobalGetEncoding()
         {
             var action = new Action(() => Encoding.GetEncoding(s_codepageName));
             var exception = Assert.Throws<ArgumentException>(action);
