@@ -1,31 +1,21 @@
-﻿using System;
-using System.Text;
 using Xunit;
 
 namespace DemoLib.Test
 {
-    public class LocalProviderContainerTest
+    public class LocalProviderContainerTest : Base
     {
-        private static readonly string s_codepageName = "windows-1252";
-
-        private static readonly string s_exceptionMessage = string.Concat(
-            $"'{s_codepageName}' is not a supported encoding name.",
-            " For information on defining a custom encoding, see the documentation for the Encoding.RegisterProvider method.",
-            " (Parameter 'name')");
-
         [Fact]
         public void TestA_LocalGetEncoding()
         {
             var encoding = LocalProviderContainer.GetEncoding(s_codepageName);
-            Assert.NotNull(encoding);
+            Assert.Equal(s_codepageName, encoding.WebName);
         }
 
         [Fact]
         public void TestB_GlobalGetEncoding()
         {
-            var action = new Action(() => Encoding.GetEncoding(s_codepageName));
-            var exception = Assert.Throws<ArgumentException>(action);
-            Assert.Equal(s_exceptionMessage, exception.Message);
+            var encoding = GetEncoding.Invoke();
+            Assert.Equal(s_codepageName, encoding.WebName);
         }
     }
 }
