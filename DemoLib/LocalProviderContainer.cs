@@ -2,10 +2,10 @@ using System.Text;
 
 namespace DemoLib
 {
-    public class LocalProviderContainer
+    public static class LocalProviderContainer
     {
-        static LocalProviderContainer() => Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-        public static Encoding GetEncoding(string codepageName) => Encoding.GetEncoding(codepageName);
+        public static Encoding GetEncoding(string codepageName) =>
+            CodePagesEncodingProvider.Instance.GetEncoding(codepageName)
+            ?? Encoding.GetEncoding(codepageName);
     }
 }

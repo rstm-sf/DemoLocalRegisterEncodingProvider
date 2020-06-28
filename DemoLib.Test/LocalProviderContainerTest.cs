@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace DemoLib.Test
@@ -14,8 +15,8 @@ namespace DemoLib.Test
         [Fact]
         public void TestB_GlobalGetEncoding()
         {
-            var encoding = GetEncoding.Invoke();
-            Assert.Equal(s_codepageName, encoding.WebName);
+            var exception = Assert.Throws<ArgumentException>(GetEncoding);
+            Assert.Equal(s_exceptionMessage, exception.Message);
         }
     }
 }
